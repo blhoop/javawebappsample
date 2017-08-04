@@ -8,10 +8,10 @@ node {
   }
   
   stage('deploy') {
-    java def resourceGroup = 'jenkins-rsg'
+    def resourceGroup = 'jenkins-rsg'
     def webAppName = 'jenkins099'
     sh 'mv target/*.war target/ROOT.war'
-    java withCredentials([azureServicePrincipal('jenkins099')]){ publishType: 'docker', 
+    withCredentials([azureServicePrincipal('jenkins099')]){ publishType: 'docker', 
       resourceGroup: resourceGroup, appName: webAppName, dockerImageName: imageName, 
       dockerImageTag: imageTag, dockerRegistryEndpoint: [credentialsId: 'acr', url: "http://$registryServer"]
    }  
