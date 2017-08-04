@@ -8,10 +8,10 @@ node {
   }
   
   stage('deploy') {
-    def resourceGroup = 'jenkins-rsg'
+    java def resourceGroup = 'jenkins-rsg'
     def webAppName = 'jenkins99test'
     sh 'mv target/*.war target/ROOT.war'
-    azureWebAppPublish withCredentials([azureServicePrincipal('jenkins99')]) { publishType: 'file',
+    java withCredentials([azureServicePrincipal('jenkins99')]) { publishType: 'file',
                        resourceGroup: resourceGroup, appName: webAppName,
                        filePath: '*.war', sourceDirectory: 'target', targetDirectory: 'webapps'
      }
