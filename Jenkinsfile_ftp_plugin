@@ -12,7 +12,7 @@ node {
     def webAppName = 'jenkins99test'
     sh 'mv target/*.war target/ROOT.war'
     java withCredentials([azureServicePrincipal('jenkins99')]) { publishType: 'file',
-                       resourceGroup: jenkins99, appName: jenkins99test,
+                       resourceGroup: resourceGroup, appName: webAppName,
                        filePath: '*.war', sourceDirectory: 'target', targetDirectory: 'webapps'
      }
   }
