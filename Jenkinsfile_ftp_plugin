@@ -11,9 +11,9 @@ node {
     def resourceGroup = 'jenkins-rsg'
     def webAppName = 'jenkins23'
     sh 'mv target/*.war target/ROOT.war'
-    azureWebAppPublish withCredentials([azureServicePrincipal('jenkins23')]) { publishType: 'file',
+    azureWebAppPublish withCredentials([azureServicePrincipal('jenkins23')]), publishType: 'file',
                        resourceGroup: resourceGroup, appName: webAppName,
                        filePath: '*.war', sourceDirectory: 'target', targetDirectory: 'webapps'
-    }                   
+                       
   }
 }
